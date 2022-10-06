@@ -1,6 +1,8 @@
 package com.example.directoryapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,25 +13,33 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.directoryapp.adaptadores.ListaContactosAdapter;
+import com.example.directoryapp.db.DbContactos;
 import com.example.directoryapp.db.DbHelper;
+import com.example.directoryapp.entidades.Contactos;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button mBtnCreate;
+    RecyclerView listaContactos;
+    ArrayList<Contactos> listaArrayContactos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mBtnCreate=findViewById(R.id.btnCreate);
+        listaContactos=findViewById(R.id.listaContactos);
+        listaContactos.setLayoutManager(new LinearLayoutManager(this));
 
-        mBtnCreate.setOnClickListener(view -> {
-            DbHelper dbHelper = new DbHelper(MainActivity.this);
-            SQLiteDatabase db = dbHelper.getWritableDatabase();
-            if(db != null) Toast.makeText(MainActivity.this,"BASE DE DATOS CREADA", Toast.LENGTH_SHORT).show();
-            else Toast.makeText(MainActivity.this,"ERROR AL CREAR BASE DE DATOS", Toast.LENGTH_SHORT).show();
-        });
+        DbContactos dbContactos = new DbContactos(MainActivity.this);
+
+        listaArrayContactos = new ArrayList<>();
+
+        ListaContactosAdapter adapter = new ListaContactosAdapter(dbContactos.mostrarContactos());
+        listaContactos.setAdapter(adapter);
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu){

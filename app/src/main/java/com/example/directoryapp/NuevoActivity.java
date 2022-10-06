@@ -3,7 +3,6 @@ package com.example.directoryapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -34,13 +33,13 @@ public class NuevoActivity extends AppCompatActivity {
 
         btnGuardar.setOnClickListener(view -> {
             DbContactos dbContactos = new DbContactos(NuevoActivity.this);
-            long id = dbContactos.crearContacto(txtNombre.getText().toString(), txtWebpage.getText().toString(),
+            long id = dbContactos.insertarContacto(txtNombre.getText().toString(), txtWebpage.getText().toString(),
                     txtTelefono.getText().toString(), txtEmail.getText().toString(), txtProyser.getText().toString(),
                     toConvertBool(checkCons.isChecked()),toConvertBool(checkDesa.isChecked()),toConvertBool(checkFabr.isChecked()));
 
             if(id>0) {
                 Toast.makeText(NuevoActivity.this,"REGISTRO GUARDADO", Toast.LENGTH_SHORT).show();
-
+                limpiar();
             } else Toast.makeText(NuevoActivity.this,"ERROR AL GUARDAR EL REGISTRO", Toast.LENGTH_SHORT).show();
         });
     }

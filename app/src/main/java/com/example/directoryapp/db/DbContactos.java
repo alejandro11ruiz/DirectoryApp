@@ -2,9 +2,14 @@ package com.example.directoryapp.db;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.Nullable;
+
+import com.example.directoryapp.entidades.Contactos;
+
+import java.util.ArrayList;
 
 public class DbContactos extends DbHelper{
 
@@ -15,7 +20,7 @@ public class DbContactos extends DbHelper{
         this.context = context;
     }
 
-    public long crearContacto(String nombre, String webpage, String telefono, String email, String proyser, int consultoria, int desarrollo, int fabrica){
+    public long insertarContacto(String nombre, String webpage, String telefono, String email, String proyser, int consultoria, int desarrollo, int fabrica){
 
         long id = 0;
 
@@ -39,4 +44,36 @@ public class DbContactos extends DbHelper{
         }
         return id;
     }
+
+    public ArrayList<Contactos> mostrarContactos(){
+
+        DbHelper dbHelper = new DbHelper(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ArrayList<Contactos> listaContactos = new ArrayList<>();
+        Contactos contacto = null;
+        Cursor cursorContactos = null;
+
+        cursorContactos = db.rawQuery("SELECT * FROM "+TABLE_CONTACTOS,null);
+
+        if(cursorContactos.moveToFirst()){
+            do {
+                contacto = new Contactos();
+                contacto.setNombre(cursorContactos.getString(0));
+                contacto.setWebpage(cursorContactos.getString(1));
+                contacto.setTelefono(cursorContactos.getString(2));
+                contacto.setEmail(cursorContactos.getString(3));
+                contacto.setProyser(cursorContactos.getString(4));
+                contacto.setConsultoria(cursorContactos.getInt(5));
+                contacto.setDesarrollo(cursorContactos.getInt(6));
+                contacto.setFabrica(cursorContactos.getInt(7));
+                listaContactos.add(contacto);
+            }while (cursorContactos.moveToNext());
+        }
+
+        cursorContactos.close();
+
+        return listaContactos;
+    }
+
 }
