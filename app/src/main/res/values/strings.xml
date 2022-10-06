@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">DirectoryApp</string>
+    <string name="hint_nombre">Nombre:</string>
+    <string name="hint_webpage">Pagina web:</string>
+    <string name="hint_telefono">Telefono:</string>
+    <string name="hint_email">Correo electronico:</string>
+    <string name="hint_proyser">Productos y Servicios:</string>
+    <string name="hint_clasificacion">Clasificacion:</string>
+    <string name="hint_consultoria">Consultoria</string>
+    <string name="hint_desarrollo">Desarrollo a la medida</string>
+    <string name="hint_fabrica">Fabrica de software</string>
+    <string name="menu_nuevo">Nuevo registro</string>
+
 </resources>

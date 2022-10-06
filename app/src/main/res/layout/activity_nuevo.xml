@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".NuevoActivity">
+
+
+    <EditText
+        android:id="@+id/txtNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/hint_nombre"
+        android:inputType="textPersonName"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/txtWebpage"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/hint_webpage"
+        android:inputType="textPersonName"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/txtTelefono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/hint_telefono"
+        android:inputType="phone"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/txtEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/hint_email"
+        android:inputType="textEmailAddress"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/txtProyser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/hint_proyser"
+        android:inputType="textMultiLine"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/tvClasificacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hint_clasificacion"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/black"
+        android:gravity="center_horizontal"/>
+    
+    <RelativeLayout android:layout_height="wrap_content" android:layout_width="wrap_content">
+        
+        <CheckBox
+            android:id="@+id/cbCons"
+            android:layout_width="136dp"
+            android:layout_height="wrap_content"
+            android:text="@string/hint_consultoria"
+            android:textSize="18sp" />
+
+        <CheckBox
+            android:id="@+id/cbDesa"
+            android:layout_width="136dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/cbCons"
+            android:text="@string/hint_desarrollo"
+            android:textSize="18sp" />
+
+        <CheckBox
+            android:id="@+id/cbFabr"
+            android:layout_width="136dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/cbDesa"
+            android:text="@string/hint_fabrica"
+            android:textSize="18sp" />
+    
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnCreate"
+        android:text="Create"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        />
+
+</LinearLayout>
