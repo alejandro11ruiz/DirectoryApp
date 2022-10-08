@@ -59,14 +59,15 @@ public class DbContactos extends DbHelper{
         if(cursorContactos.moveToFirst()){
             do {
                 contacto = new Contactos();
-                contacto.setNombre(cursorContactos.getString(0));
-                contacto.setWebpage(cursorContactos.getString(1));
-                contacto.setTelefono(cursorContactos.getString(2));
-                contacto.setEmail(cursorContactos.getString(3));
-                contacto.setProyser(cursorContactos.getString(4));
-                contacto.setConsultoria(cursorContactos.getInt(5));
-                contacto.setDesarrollo(cursorContactos.getInt(6));
-                contacto.setFabrica(cursorContactos.getInt(7));
+                contacto.setId(cursorContactos.getInt(0));
+                contacto.setNombre(cursorContactos.getString(1));
+                contacto.setWebpage(cursorContactos.getString(2));
+                contacto.setTelefono(cursorContactos.getString(3));
+                contacto.setEmail(cursorContactos.getString(4));
+                contacto.setProyser(cursorContactos.getString(5));
+                contacto.setConsultoria(cursorContactos.getInt(6));
+                contacto.setDesarrollo(cursorContactos.getInt(7));
+                contacto.setFabrica(cursorContactos.getInt(8));
                 listaContactos.add(contacto);
             }while (cursorContactos.moveToNext());
         }
@@ -74,6 +75,57 @@ public class DbContactos extends DbHelper{
         cursorContactos.close();
 
         return listaContactos;
+    }
+
+
+    public Contactos verContacto(int id){
+
+        DbHelper dbHelper = new DbHelper(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        Contactos contacto = null;
+        Cursor cursorContactos;
+
+        cursorContactos = db.rawQuery("SELECT * FROM "+TABLE_CONTACTOS + " WHERE id = " + id + " LIMIT 1",null);
+
+        if(cursorContactos.moveToFirst()){
+            contacto = new Contactos();
+            contacto.setId(cursorContactos.getInt(0));
+            contacto.setNombre(cursorContactos.getString(1));
+            contacto.setWebpage(cursorContactos.getString(2));
+            contacto.setTelefono(cursorContactos.getString(3));
+            contacto.setEmail(cursorContactos.getString(4));
+            contacto.setProyser(cursorContactos.getString(5));
+            contacto.setConsultoria(cursorContactos.getInt(6));
+            contacto.setDesarrollo(cursorContactos.getInt(7));
+            contacto.setFabrica(cursorContactos.getInt(8));
+        }
+
+        cursorContactos.close();
+
+        return contacto;
+    }
+
+
+    public boolean editarContacto(int id, String nombre, String webpage, String telefono, String email, String proyser, int consultoria, int desarrollo, int fabrica){
+
+        boolean correcto = false;
+
+        DbHelper dbHelper = new DbHelper(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        try {
+            db.execSQL("UPDATE " + TABLE_CONTACTOS + " SET nombre = '"+nombre+"',webpage = '"+webpage+"',telefono = '"+telefono+"'," +
+                    "email = '"+email+"',proyser = '"+proyser+"',consultoria = '"+consultoria+"',desarrollo = '"+desarrollo+"'," +
+                    "fabrica = '"+fabrica+"' WHERE id='"+id+"' ");
+            correcto = true;
+        }catch (Exception ex){
+            ex.toString();
+            correcto = false;
+        } finally {
+            db.close();
+        }
+        return correcto;
     }
 
 }

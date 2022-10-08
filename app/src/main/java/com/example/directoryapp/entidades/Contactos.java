@@ -2,6 +2,7 @@ package com.example.directoryapp.entidades;
 
 public class Contactos {
 
+    private int id;
     private String nombre;
     private String webpage;
     private String telefono;
@@ -73,5 +74,13 @@ public class Contactos {
 
     public void setFabrica(int fabrica) {
         this.fabrica = fabrica;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -19,7 +19,8 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_CONTACTOS + "("+
-                "nombre TEXT PRIMARY KEY," + "webpage TEXT," + "telefono TEXT,"+
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "nombre TEXT," + "webpage TEXT," + "telefono TEXT,"+
                 "email TEXT," + "proyser TEXT," + "consultoria INTEGER," +
                 "desarrollo INTEGER," + "fabrica INTEGER)");
     }

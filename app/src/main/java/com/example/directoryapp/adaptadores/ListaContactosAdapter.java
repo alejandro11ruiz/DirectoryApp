@@ -1,5 +1,7 @@
 package com.example.directoryapp.adaptadores;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.directoryapp.R;
+import com.example.directoryapp.VerActivity;
 import com.example.directoryapp.entidades.Contactos;
 
 import java.util.ArrayList;
@@ -49,6 +52,13 @@ public class ListaContactosAdapter extends RecyclerView.Adapter<ListaContactosAd
             viewNombre=itemView.findViewById(R.id.viewNombre);
             viewTelefono=itemView.findViewById(R.id.viewTelefono);
             viewEmail=itemView.findViewById(R.id.viewEmail);
+
+            itemView.setOnClickListener(view -> {
+                Context context = view.getContext();
+                Intent intent = new Intent(context, VerActivity.class);
+                intent.putExtra("ID", listaContactos.get(getAdapterPosition()).getId());
+                context.startActivity(intent);
+            });
         }
     }
 }
