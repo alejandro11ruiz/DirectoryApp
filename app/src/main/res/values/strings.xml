@@ -10,5 +10,6 @@
     <string name="hint_desarrollo">Desarrollo a la medida</string>
     <string name="hint_fabrica">Fabrica de software</string>
     <string name="menu_nuevo">Nuevo registro</string>
+    <string name="mostrar_todos">Todos</string>
 
 </resources>
