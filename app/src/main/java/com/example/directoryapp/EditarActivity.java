@@ -18,7 +18,7 @@ public class EditarActivity extends AppCompatActivity {
 
     EditText txtNombre, txtWebpage, txtTelefono, txtEmail, txtProyser;
     CheckBox checkCons, checkDesa, checkFabr;
-    Button btnGuardar, btnEditar;
+    Button btnGuardar, btnEditar, btnEliminar;
     boolean correcto = false;
     Contactos contacto;
     int id = 0;
@@ -38,6 +38,10 @@ public class EditarActivity extends AppCompatActivity {
         checkFabr=findViewById(R.id.cbFabr);
         btnGuardar=findViewById(R.id.btnCreate);
         btnEditar=findViewById(R.id.btnEditar);
+        btnEliminar=findViewById(R.id.btnEliminar);
+
+        btnEditar.setVisibility(View.INVISIBLE);
+        btnEliminar.setVisibility(View.INVISIBLE);
 
         if(savedInstanceState==null){
             Bundle extras = getIntent().getExtras();
@@ -63,8 +67,6 @@ public class EditarActivity extends AppCompatActivity {
             checkCons.setChecked(toConvertInt(contacto.isConsultoria()));
             checkDesa.setChecked(toConvertInt(contacto.isDesarrollo()));
             checkFabr.setChecked(toConvertInt(contacto.isFabrica()));
-
-            btnEditar.setVisibility(View.INVISIBLE);
         }
 
         btnGuardar.setOnClickListener(view -> {

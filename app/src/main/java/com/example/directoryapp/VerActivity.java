@@ -1,7 +1,9 @@
 package com.example.directoryapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.directoryapp.db.DbContactos;
 import com.example.directoryapp.entidades.Contactos;
@@ -18,7 +21,7 @@ public class VerActivity extends AppCompatActivity {
 
     EditText txtNombre, txtWebpage, txtTelefono, txtEmail, txtProyser;
     CheckBox checkCons, checkDesa, checkFabr;
-    Button btnGuardar, btnEditar;
+    Button btnGuardar, btnEditar, btnEliminar;
 
     Contactos contacto;
     int id = 0;
@@ -38,6 +41,7 @@ public class VerActivity extends AppCompatActivity {
         checkFabr=findViewById(R.id.cbFabr);
         btnGuardar=findViewById(R.id.btnCreate);
         btnEditar=findViewById(R.id.btnEditar);
+        btnEliminar=findViewById(R.id.btnEliminar);
 
         if(savedInstanceState==null){
             Bundle extras = getIntent().getExtras();
@@ -82,10 +86,30 @@ public class VerActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        btnEliminar.setOnClickListener(view -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(VerActivity.this);
+            //.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            builder.setMessage("Are you sure you want to delete this contact?").
+                    setPositiveButton("Yes", (dialogInterface, i) -> {
+                        boolean correcto = dbContactos.eliminarContacto(id);
+                        if(correcto){
+                            lista();
+                            Toast.makeText(this, "Contact deleted successfully", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .setNegativeButton("No", (dialogInterface, i) -> {
+
+                    }).show();
+        });
+
     }
 
     private boolean toConvertInt(int checkBox){
         if (checkBox == 1) return true;
         else return false;
+    }
+
+    private void lista(){
+        startActivity(new Intent(this, MainActivity.class));
     }
 }
